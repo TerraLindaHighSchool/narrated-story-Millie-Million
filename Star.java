@@ -23,10 +23,10 @@ public class Star extends Actor
       x = Greenfoot.getRandomNumber(worldWidth);
       y = Greenfoot.getRandomNumber(worldHeight);
     
-   }
-
-   public void move()
-   {
+    }
+    
+    public void move()
+    {
        x = speed + x;
        setLocation(x + speed, y);
        if(x < 1)
@@ -34,5 +34,15 @@ public class Star extends Actor
           x = getWorld().getWidth();
        }
        
-   }
+    }
+    
+    public int getX()
+    {
+        return x;
+    }
+    
+    public int getY()
+    {
+        return y;
+    }
 }
