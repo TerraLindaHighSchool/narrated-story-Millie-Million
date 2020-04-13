@@ -19,7 +19,7 @@ public class Button extends Actor
     
     public Button()
     {
-        this("Click to Begin Story");
+        this("Click to Begin Adventure");
     }
 
     /**
