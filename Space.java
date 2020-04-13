@@ -82,5 +82,6 @@ public class Space extends World
         button.setLocation(117,382);
         button.setLocation(71,376);
         button.setLocation(103,370);
+        button.setLocation(119,375);
     }
 }
