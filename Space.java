@@ -26,6 +26,7 @@ public class Space extends World
         image.setColor(Color.BLACK);
         image.fill();
         star();
+        prepare();
     }
     
     private void star()
@@ -56,5 +57,22 @@ public class Space extends World
                 stars[i] = star;
             }
         }
+    }
+    
+    public void act()
+    {
+        
+    }
+    
+    private void prepare()
+    {
+        Echo echo = new Echo();
+        addObject(echo,123,210);
+        Drone drone = new Drone();
+        addObject(drone,479,157);
+        Drone drone2 = new Drone();
+        addObject(drone2,427,206);
+        Drone drone3 = new Drone();
+        addObject(drone3,479,255);
     }
 }
