@@ -13,6 +13,11 @@ public class Echo extends SmoothMover
 {
     private static final int gunReloadTime = 5;         // The minimum delay between firing the gun.
     private int reloadDelayCount;               // How long ago we fired the gun the last time.
+    private boolean gameLose = false;
+    private Boolean gameWine = false;
+    
+    private GreenfootImage echo = new GreenfootImage("Slipstream.png");
+    private GreenfootImage echoWithThrust = new GreenfootImage("EchoThrust.png");
     
     /**
      * Initialise the Echo.
@@ -62,13 +67,13 @@ public class Echo extends SmoothMover
     {
         if (boosterOn) 
         {
-            //setImage (rocketWithThrust);
+            setImage (echoWithThrust);
             addToVelocity(new Vector(getRotation(), 0.5));
             move();
         }
         else
         {
-            //setImage(Echo);        
+            setImage(echo);        
         }
     }
     
@@ -77,8 +82,17 @@ public class Echo extends SmoothMover
         Drone a = (Drone) getOneIntersectingObject(Drone.class);
         if (a != null)
         {
-            getWorld().addObject(new Explosion(), getX(), getY());
+            gameLose = true;
+            endGame();
             getWorld().removeObject(this);
+        }
+    }
+    
+    private void endGame()
+    {
+        if (gameLose = true)
+        {
+            Greenfoot.setWorld(new EndGameLose());
         }
     }
     
@@ -89,10 +103,10 @@ public class Echo extends SmoothMover
     {
         if (reloadDelayCount >= gunReloadTime) 
         {
-           // Bullet bullet = new Bullet (getVelocity(), getRotation());
-            //getWorld().addObject (bullet, getX(), getY());
-            //bullet.move ();
-            reloadDelayCount = 0;
+           Bullet bullet = new Bullet (getVelocity(), getRotation());
+           getWorld().addObject (bullet, getX(), getY());
+           bullet.move ();
+           reloadDelayCount = 0;
         }
     }
 }
