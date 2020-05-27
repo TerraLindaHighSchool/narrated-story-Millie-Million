@@ -12,9 +12,8 @@ import greenfoot.*;
 public class Echo extends SmoothMover
 {
     private static final int gunReloadTime = 5;         // The minimum delay between firing the gun.
-
     private int reloadDelayCount;               // How long ago we fired the gun the last time.
-
+    
     /**
      * Initialise the Echo.
      */
@@ -32,6 +31,7 @@ public class Echo extends SmoothMover
         checkKeys();
         reloadDelayCount++;
         move();
+        checkCollision();
     }
     
     /**
@@ -64,10 +64,21 @@ public class Echo extends SmoothMover
         {
             //setImage (rocketWithThrust);
             addToVelocity(new Vector(getRotation(), 0.5));
+            move();
         }
         else
         {
             //setImage(Echo);        
+        }
+    }
+    
+    private void checkCollision()
+    {
+        Drone a = (Drone) getOneIntersectingObject(Drone.class);
+        if (a != null)
+        {
+            getWorld().addObject(new Explosion(), getX(), getY());
+            getWorld().removeObject(this);
         }
     }
     
@@ -84,5 +95,4 @@ public class Echo extends SmoothMover
             reloadDelayCount = 0;
         }
     }
-    
 }
