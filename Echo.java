@@ -14,7 +14,7 @@ public class Echo extends SmoothMover
     private static final int gunReloadTime = 5;         // The minimum delay between firing the gun.
     private int reloadDelayCount;               // How long ago we fired the gun the last time.
     private boolean gameLose = false;
-    private Boolean gameWine = false;
+    private Boolean gameWin = false;
     
     private GreenfootImage echo = new GreenfootImage("Slipstream.png");
     private GreenfootImage echoWithThrust = new GreenfootImage("EchoThrust.png");
@@ -93,6 +93,11 @@ public class Echo extends SmoothMover
         if (gameLose = true)
         {
             Greenfoot.setWorld(new EndGameLose());
+        }
+        
+        if (gameWin = true)
+        {
+            Greenfoot.setWorld(new EndGameWin());
         }
     }
     
