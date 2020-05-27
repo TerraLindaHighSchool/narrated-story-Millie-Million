@@ -1,20 +1,88 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
 /**
- * Write a description of class Echo here.
+ * A rocket that can be controlled by the arrowkeys: up, left, right.
+ * The gun is fired by hitting the 'space' key. 'z' releases a proton wave.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Poul Henriksen
+ * @author Michael Kölling
+ * 
+ * @version 1.1
  */
-public class Echo extends Actor
+public class Echo extends SmoothMover
 {
-    /**
-     * Act - do whatever the Protagonist wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act() 
-    {
-        // Add your action code here.
-    }    
-}
+    private static final int gunReloadTime = 5;         // The minimum delay between firing the gun.
 
+    private int reloadDelayCount;               // How long ago we fired the gun the last time.
+
+    /**
+     * Initialise the Echo.
+     */
+    public Echo()
+    {
+        reloadDelayCount = 5;
+    }
+
+    /**
+     * Do what a rocket's gotta do. (Which is: mostly flying about, and turning,
+     * accelerating and shooting when the right keys are pressed.)
+     */
+    public void act()
+    {
+        checkKeys();
+        reloadDelayCount++;
+        move();
+    }
+    
+    /**
+     * Check whether there are any key pressed and react to them.
+     */
+    private void checkKeys() 
+    {
+        ignite(Greenfoot.isKeyDown("up"));
+        
+        if (Greenfoot.isKeyDown("space")) 
+        {
+            fire();
+        }
+        
+        if (Greenfoot.isKeyDown("left"))
+        {
+            turn(-5);
+        }
+        
+        if (Greenfoot.isKeyDown("right"))
+        {
+            turn(5);
+        }
+        
+    }
+    
+    private void ignite(boolean boosterOn) 
+    {
+        if (boosterOn) 
+        {
+            //setImage (rocketWithThrust);
+            addToVelocity(new Vector(getRotation(), 0.5));
+        }
+        else
+        {
+            //setImage(Echo);        
+        }
+    }
+    
+    /**
+     * Fire a bullet if the gun is ready.
+     */
+    private void fire() 
+    {
+        if (reloadDelayCount >= gunReloadTime) 
+        {
+           // Bullet bullet = new Bullet (getVelocity(), getRotation());
+            //getWorld().addObject (bullet, getX(), getY());
+            //bullet.move ();
+            reloadDelayCount = 0;
+        }
+    }
+    
+}
